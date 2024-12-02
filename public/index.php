@@ -61,19 +61,19 @@ if ($uriArray[1] === 'api' && $uriArray[2] === 'diaryEntry' && $_SERVER['REQUEST
 
 //views
 
-//works
+
 if ($uriArray[1] === 'diaryEntry-add' && $_SERVER['REQUEST_METHOD'] === 'GET') {
     $DiaryEntryController = new DiaryEntryController();
     $DiaryEntryController->DiaryEntryAddView();
 }
 
-//work 
+
 if ($uriArray[1] === 'diaryEntry-update' && $_SERVER['REQUEST_METHOD'] === 'GET') {
     $DiaryEntryController = new DiaryEntryController();
     $DiaryEntryController->DiaryEntryUpdateView();
 }
 
-//not work
+
 if ($uriArray[1] === 'diaryEntry-delete' && $_SERVER['REQUEST_METHOD'] === 'GET') {
     $DiaryEntryController = new DiaryEntryController();
     $DiaryEntryController->DiaryEntryDeleteView();

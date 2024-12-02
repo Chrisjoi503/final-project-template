@@ -8,36 +8,39 @@ class DiaryEntryController
 {
     // deals with input error
      // something not working 
-    public function validateDiaryEntry($inputData) {
+     public function validateDiaryEntry($inputData) {
         $errors = [];
+        $id = false;
+        if(array_key_exists('id', $inputData)) {
+            $id = $inputData['id'];
+        }
         $title = $inputData['title'];
         $content = $inputData['content'];
 
-        
+        // deals with input error
+        if ($id) {
+            $id = htmlspecialchars($id, ENT_QUOTES|ENT_HTML5, 'UTF-8', true);
+            if (strlen($id) < 0) {
+                $errors['requiredId'] = 'id is required';
+            }
+        }
         if ($title) {
             $title = htmlspecialchars($title, ENT_QUOTES|ENT_HTML5, 'UTF-8', true);
             if (strlen($title) < 2) {
-                $errors['titleShort'] = 'is too short';
+                $errors['titleShort'] = 'title is too short';
             }
-        } 
-        else if (strlen($title) > 254) {
-            $errors['titleLong'] = ' is too long';
-        }
-        else {
-            $errors['requiredTitle'] = ' is required';
+        } else {
+            $errors['requiredTitle'] = 'title is required';
         }
 
         if ($content) {
             $content = htmlspecialchars($content, ENT_QUOTES|ENT_HTML5, 'UTF-8', true);
             if (strlen($content) < 2) {
-                $errors['contentShort'] = ' is too short';
+                $errors['contentShort'] = 'content is too short';
             }
-            else if (strlen($content) > 1000) {
-                $errors['contentLong'] = ' is too long';
-            }
-            } else {
-            $errors['requiredContent'] = ' is required';
-             }
+        } else {
+            $errors['requiredContent'] = 'content is required';
+        }
 
         if (count($errors)) {
             http_response_code(400);
@@ -45,7 +48,7 @@ class DiaryEntryController
             exit();
         }
         return [
-            
+            'id' => $id,
             'title' => $title,
             'content' => $content
         ];
