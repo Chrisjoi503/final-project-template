@@ -38,4 +38,5 @@ class DiaryEntry extends Model {
         $query = "DELETE FROM diaryEntry where id = :id";
         return $this->fetchAllWithParams($query, $inputData);
     }
+    // login and sign out function 
 }

@@ -9,11 +9,49 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <link rel="stylesheet" href="/assets/styles/posts-view.css">
         <style>
+            h2{
+                text-align: center;
+                font-family: 'Lucida Handwriting', cursive;
+                font-weight: bold;
+                margin-top: 3%;
+                margin-bottom: 2%;
+                border-top: 0%;;
+               
+            }
+            #posts-data{
+                margin-top: 2%;
+                margin-left: 25%;
+                padding-bottom: 4%;
+                width: 50%;
+                background-color:#d7c7a6;
+                text-align: center;
+                border-radius: 15px;
+                color: black;
+                
+            }
             body{
                 background-color: #260d34;
                 color:  #d03791;
                 
             }
+            .margin-thirty{
+              
+                text-align: center;
+                margin-bottom: 2%;
+                font-family: 'Lucida Handwriting', cursive;
+                text-align: center;
+            }
+            .link{
+                position: fixed;
+                top: 20px; 
+                left: 20px;
+                padding: 10px 20px;
+                color: white;
+            }
+            #delete-button{
+                margin-top: 2%;
+            }
+            
         </style>
     </head>
     <body>
@@ -21,7 +59,7 @@
         <div class="container posts-form margin-thirty">
             <a href="http://localhost:8888/" class="link">Home</a>
             <div id="delete-post-container" class="margin-thirty">
-                <h2 id="post-delete">Are you sure you want to delete: </h2>
+                <h2 id="post-delete">Are you sure you want to delete? </h2>
                 <div id="posts-data"></div>
                 <button class="btn btn-danger delete-button margin-twenty" id="delete-button">Delete</button>
             </div>
@@ -39,13 +77,13 @@
                     success: function (data) {
                         $.each( data, function( key, value ) {
                             console.log(value)
-                            $('#post-delete').append(`
-                            <br>
-                            ID: ${value['id']}
+                            $('#posts-data').append(`
+                            
                             <br>
                             ${value['title']}
                             <br>
-                            ${value['content']}?`)
+                            <br>
+                            ${value['content']}`)
                         });
                     }
                 });
