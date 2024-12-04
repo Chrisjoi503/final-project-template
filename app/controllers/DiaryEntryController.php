@@ -17,6 +17,7 @@ class DiaryEntryController
         $content = $inputData['content'];
 
         // deals with input error
+        // special characters
         if ($id) {
             $id = htmlspecialchars($id, ENT_QUOTES|ENT_HTML5, 'UTF-8', true);
             if (strlen($id) < 0) {

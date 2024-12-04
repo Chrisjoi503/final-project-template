@@ -33,13 +33,10 @@
                 margin-top: 3%;
                 margin-bottom: 2%;
                 border-top: 0%;
-                
-               
-               
             }
             #diaryEntry-container{
                 width: 55%;
-                height: 600px;
+                height: 550px;
                 margin-left: 20%;
                 padding-top: 2%;
                 text-align: center;
@@ -82,6 +79,7 @@
                 font-family: 'Lucida Handwriting', cursive;
                 color: black;
             }
+            
             .btn-primary{
                 margin-top: 15%;
                 font-size: small;
@@ -95,6 +93,8 @@
                
                 font-size: small;
                 color: #e75656;
+                margin-left: 0%;
+             
 
             }
             .btn-danger:hover{
@@ -110,7 +110,7 @@
                 background-color: #f14771;
                 border-color: #f14771;
             }
-
+         
             
             
         </style>
@@ -144,10 +144,12 @@
                                     <span class="diaryEntry">${value['content']} <br> <br></span>
                                 
                                 </div> 
+                              
                                 <span>
                                     <a href="diaryEntry-update/${value['id']}" class="btn-primary">edit</a>
-                                    <a href="diaryEntry-delete/${value['id']}" class="btn-danger">delete</a> <br><br>
-                                </span> `)
+                                    <a href="diaryEntry-delete/${value['id']}" class="btn-primary btn-danger">delete</a> <br><br>
+                                </span>
+                            </div> `)
                         });
                     },
                     error: function (data) {

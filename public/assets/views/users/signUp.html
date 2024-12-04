@@ -1,0 +1,163 @@
+<!-- ignore this -->
+<!-- <!DOCTYPE html>
+in index link this and the login page -->
+<html lang="en">
+    <head>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <style>
+            body{
+               
+                color:   #c53a9d ;
+                background-color: #260d34;
+                 
+            }
+            .margin-thirty{
+                text-align: center;
+                margin-bottom: 2%;
+                font-family: 'Lucida Handwriting', cursive;
+                text-align: center;
+            }
+            .link{
+                position: fixed;
+                top: 20px; 
+                left: 20px;
+                padding: 10px 20px;
+            }
+            .submit{
+                background-color:#fe6c90; 
+                color: #ffffff;
+                border: none; 
+                padding: 10px 20px; 
+                border-radius: 5px;
+                margin-top: 6%;
+                cursor: pointer; 
+                
+            }
+            .navbar{
+                background-color:   #c53a9d ;
+                color:#260d34;
+            }
+            .navbar-brand{
+                color:#260d34;
+                font-family: 'Lucida Handwriting';
+               
+               
+            }
+            .navbar-brand:hover{
+                color: #b672de;
+            }
+            .navbar-no{
+                font-size: xx-large;
+                font-family: 'Lucida Handwriting',cursive;
+               
+            }
+            .nav-item{
+                position: fixed;
+                top: 20px; 
+                right: 20px;
+                padding: 10px 20px;
+             
+            }
+            .navbar-no:hover{
+                color:#260d34;
+            }
+        </style>
+
+    </head>
+    <body>
+       
+        <nav class="navbar navbar-expand-lg ">
+            <span class="navbar-no navbar-brand">Diary Entry</span>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="navbar-nav">
+                <a class="navbar-brand nav-item nav-link active" href="login.html"><u>Login </u><span class="sr-only">(current)</span></a>
+              </div>
+            </div>
+          </nav>
+         <div class="container sign up">
+           
+            <h2 class="margin-thirty"><br> <br>sign up</h2>
+            <form id="form-id">
+                <div class="form-group margin-twenty">
+                    <label for="username" id="username-label">Username</label>
+                    <label id="username-error"></label>
+                    <input type="text" class="form-control" id="username"
+                           placeholder="Enter username">
+                </div>
+                <div class="form-group margin-ten">
+                    <label for="password" id="password-label">Password </label>
+                    <label id="password-error"></label>
+                    <input type="password" class="form-control" id="password"
+                           placeholder="Enter password">
+                </div>
+
+                
+                <button type="submit" class="button submit">Sign Up </button>
+
+            </form>
+        </div>
+        <script>
+        
+            $(document).ready(function () {
+
+                $('#form-id').on('submit', function (e) {
+                    e.preventDefault();
+                    
+                    const username = $('#username').val();
+                    const password = $('#password').val();
+
+                    const data = {
+                      
+                        username,
+                        password
+                    }
+                    $.ajax({
+                        //need to make a backend for signning up 
+                        url: `http://localhost:8888/api/signup`,
+                        type: "POST",
+                        data: data,
+                        dataType: "json",
+                        success: function (data) {
+                            console.log("AJAX request succeeded.");
+                            window.location.replace("http://localhost:8888/");
+                            console.log(data)
+                        },
+                       
+                        error: function (data){
+                            console.log("error");
+                            console.log(data.responseJSON)
+                            $('#title-error').html('')
+                            $('#content-error').html('')
+                            $('#title').removeClass('error-border')
+                            $('#content').removeClass('error-border')
+                            if (data.responseJSON?.requiredTitle) {
+                                $('#title').addClass('error-border')
+                                $('#title-error').append(` <span class='error-text'>${data.responseJSON?.requiredTitle}</span>`)
+                            }
+                            if (data.responseJSON?.titleShort) {
+                                $('#title').addClass('error-border')
+                                $('#title-error').append(` <span class='error-text'>${data.responseJSON?.titleShort}</span>`)
+                            }
+                            if (data.responseJSON?.requiredContent) {
+                                $('#content').addClass('error-border')
+                                $('#content-error').append(` <span class='error-text'>${data.responseJSON?.requiredContent}</span>`)
+                            }
+                            if (data.responseJSON?.contentShort) {
+                                $('#content').addClass('error-border')
+                                $('#content-error').append(` <span class='error-text'>${data.responseJSON?.contentShort}</span>`)
+                            }
+                        }
+                    });
+                })
+
+            })
+       
+    </script>
+    </body>
+
+
+</html> -->

@@ -21,11 +21,11 @@
                 top: 20px; 
                 left: 20px;
                 padding: 10px 20px;
+                color: #ffffff;
             }
             body{
                 background-color: #260d34;
                 color:  #d03791;
-
             }
             
             .submit{
@@ -67,18 +67,41 @@
             .container{
                 margin-top: 12%;
             }
-            #ajax-get{
+            .weather-box {
+                padding-top: 4%;
+                background-color: #57306e;
+                color: white;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .wdata{
+                margin-bottom: 20px;
+                font-size: 1.5em;
+                color: #ffbb33;
+            }
+            .weather-box .icon {
+                margin-top: 2px;
+                width: 100px;
+                height: 100px;
+            }
+            .weather-button{
             position: fixed;    
-            top: 20px;       
+            top: 20px;  
+            border: none; 
+            padding: 0.5%;    
+            font-weight: bolder;
+
             right: 20px;  
             border-radius: 15px;
-            color: #260d34;
-            background-color:  #d03791;
-            border-color: #d03791;
-            font-family: 'Lucida Handwriting', cursive;;
+            color: #ffffff;
+            background-color:  #119ef6;
+            border-color: #119ef6;
+            font-family: 'Lucida Handwriting';
+
             }
-            #ajax-get:hover{
-                background-color: #2e2354;
+            .weather-button:hover{
+                background-color: #55e8f9;
             }
         </style>
     </head>
@@ -100,27 +123,49 @@
                     <input type="text" class="form-control" id="content"
                            placeholder="Enter content">
                 </div>
-                
+                <div id="weather-container" ></div>
                 <button type="submit" class="button submit">Submit</button>
             </form>
         </div>
 
         <p id="apidata"> </p>
-        <button id="ajax-get">Weather report</button>
+        <button id="ajax-get" class="weather-button ">Weather report</button>
         <script>
             $('#ajax-get').on('click', function () {
 
                 $.ajax({
-                    url: 'https://google-translate1.p.rapidapi.com/language/translate/v2/detect' ,
+                    url: 'https://weatherbit-v1-mashape.p.rapidapi.com/current?lon=-73.984419&lat=40.769939&units=imperial&lang=en' ,
                     type: "GET",
                     dataType: "json",
+                    headers:{
+                        "x-rapidapi-host": 'weatherbit-v1-mashape.p.rapidapi.com',
+                        "x-rapidapi-key": '827fd71deemsh7f55d3a0ff14667p148a38jsn3309a73d3376'
+                    },
                     success: function (data) {
-                       
-                        console.log(data);
+                        const weatherData = data.data[0];
+                        const temp = weatherData.temp;
+                        const description = weatherData.weather.description;
+                        const icon = weatherData.weather.icon;
+                        const windSpeed = weatherData.wind_spd;
+                        const cityName = weatherData.city_name;
+                        const countryCode = weatherData.country_code;
+                    
 
-                        $("#apidata").html(JSON.stringify(data));
+                        const weatherHTML = `
+                            <h3>${cityName}, ${countryCode}</h3>
+                            <img src="https://www.weatherbit.io/static/img/icons/${icon}.png" class="icon" alt="Weather Icon">
+                            <div class="wdata">${temp}°F</div>
+                            <div class="wdata">${description}</div>
+                            <p>Wind Speed:${windSpeed} mph</p>
+                           
+                        `;
 
+                        $('#weather-container').html(weatherHTML).show();
+                    },
+                    error: function (data) {
+                        console.log("Error fetching weather data.");
                     }
+
                 });
             });
             
