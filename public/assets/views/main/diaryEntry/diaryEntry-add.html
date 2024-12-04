@@ -128,9 +128,9 @@
             </form>
         </div>
 
-        <p id="apidata"> </p>
-        <button id="ajax-get" class="weather-button ">Weather report</button>
-        <script>
+        <!-- <p id="apidata"> </p>
+        <button id="ajax-get" class="weather-button ">Weather report</button> -->
+        <!-- <script>
             $('#ajax-get').on('click', function () {
 
                 $.ajax({
@@ -139,7 +139,7 @@
                     dataType: "json",
                     headers:{
                         "x-rapidapi-host": 'weatherbit-v1-mashape.p.rapidapi.com',
-                        "x-rapidapi-key": '827fd71deemsh7f55d3a0ff14667p148a38jsn3309a73d3376'
+                        "x-rapidapi-key": process.env.REACT_APP_API_KEY,
                     },
                     success: function (data) {
                         const weatherData = data.data[0];
@@ -169,7 +169,7 @@
                 });
             });
             
-        </script>
+        </script> -->
 
         <script>
 
